@@ -13,17 +13,26 @@ public class TodoResource
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     public List<Todo> todoList = new ArrayList<>();
+    public List<Todo>   todoList2 = List.of(new Todo("king_vinay", "Learn Spring Security"), new Todo("king_vinay", "Learn DSA"));
 
     @GetMapping("/todos")
     public List<Todo> retrieveAllTodos()
     {
-        return todoList;
+        if(todoList.isEmpty()){
+            return todoList2;
+        }else{
+            return todoList;
+        }
     }
 
     @GetMapping("/users/{username}/todos")
     public Todo retrieveTodosByUsername(@PathVariable String username)
     {
-        return todoList.getFirst();
+        if(todoList.isEmpty()){
+            return todoList2.getFirst();
+        }else{
+            return todoList.getFirst();
+        }
     }
 
     @PostMapping("/users/{username}/todos")
